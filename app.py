@@ -45,6 +45,10 @@ def hierachy_tree():
 def provision_metrics():
     return render_template("provisionMetrics.html")
 
+@app.route("/test.html")
+def test():
+    return render_template("test.html")
+
 @app.route("/team.html")
 def research():
     return render_template("team.html")
