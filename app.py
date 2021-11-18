@@ -53,6 +53,12 @@ def test():
 def research():
     return render_template("team.html")
 
+#Buttons 
+@app.route('/button_action')
+def move_arm(): 
+    print("this works")
+
+
 @app.route("/api/distance", methods=["POST"])
 def calculate_distance():
     body = json.loads(request.data)
