@@ -1,7 +1,5 @@
 #===================================================
-# S. A. M: Smarter Access Management
-# An internal tool to help employees make better access decisions for security and peace of mind.
-# STEP Capstone 2020: Kayla Patterson, Dean Alvarez, Tedi Mitiku
+#Robotic Arm 
 #===================================================
 from flask import Flask, request, render_template
 import json, pickle, csv
@@ -53,11 +51,9 @@ def test():
 def research():
     return render_template("team.html")
 
-#Buttons 
 @app.route('/button_action')
-def move_arm(): 
+def move_arm():
     print("this works")
-
 
 @app.route("/api/distance", methods=["POST"])
 def calculate_distance():
