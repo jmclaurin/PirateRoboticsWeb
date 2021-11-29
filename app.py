@@ -3,7 +3,6 @@
 #===================================================
 from flask import Flask, request, render_template
 import json, pickle, csv
-import pandas as pd
 
 # from capstone2020.core.company import Company
 # from capstone2020.core.employee import Employee
