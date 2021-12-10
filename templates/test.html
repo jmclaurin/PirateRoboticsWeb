@@ -123,37 +123,59 @@
                 <!--Fake Butttons-->
 		<div class="center-title">
             <!-- Left Bumper Button -->
-            <p><a href="/test.html" style="position:relative;left:-160px; bottom: 825px;"><button onclick="window.location.href='button_action'" type="button"
-                    style="border-color:red;border-width: 3px;padding: 23px; 
+            <p><a href="#" style="position:relative;left:-160px; bottom: 825px;"><button onclick="return false" type="button"
+                    style="padding: 23px; 
                         background-color:transparent;border-radius: 50%; width: 10%"></button></a></p>
-            <!-- Right Bumper Button -->
-            <p><a href="/" style="position:relative;left:180px; bottom: 900px;"><button type="button"
-                    style="border-color:red;border-width: 3px;padding: 23px; 
+			<!-- Right Bumper Button -->
+            <p><a href="#" style="position:relative;left:180px; bottom: 900px;"><button onclick="return false" type="button"
+                    style="padding: 23px; 
                         background-color:transparent;border-radius: 50%; width: 10%"></button></a></p>
             <!-- A Button -->
-            <p><a href="/" style="position:relative;left:180px; bottom: 805px;"><button type="button"
-                style="border-color:red;border-width: 3px;padding: 23px; 
+            <p><a href="#" style="position:relative;left:180px; bottom: 805px;"><button onclick="return false" type="button"
+                style="padding: 23px; 
                         background-color:transparent;border-radius: 50%; height: 20px;"></button></a></p>
             <!--Home Button-->
-            <p><a href="/" style="position:relative;left:1px; bottom: 990px;"><button type="button"
-                style="border-color:red;border-width: 3px;padding: 23px; 
+            <p><a href="#" style="position:relative;left:1px; bottom: 990px;"><button onclick="return false" type="button"
+                style="padding: 23px; 
                         background-color:transparent;border-radius: 50%; height: 20px;"></button></a></p>
             <!-- B Button -->
-            <p><a href="/" style="position:relative;left:228px; bottom: 985px;"><button type="button"
-                style="border-color:red;border-width: 3px;padding: 23px; 
+            <p><a href="#" style="position:relative;left:228px; bottom: 985px;"><button onclick="return false" type="button"
+                style="padding: 23px; 
                         background-color:transparent;border-radius: 50%; height: 20px;"></button></a></p>
             <!-- Right Stick Button UP-->
-            <p><a href="/" style="position:relative;left:93px; bottom: 978px;"><button type="button"
-                style="border-color:red;border-width: 3px;padding: 23px; 
+            <p><a href="#" style="position:relative;left:93px; bottom: 978px;"><button onclick="return false" type="button"
+                style="padding: 23px; 
                         background-color:transparent;border-radius: 50%; height: 20px;"></button></a></p>
             <!-- D PAD Button LEFT/OPEN -->
-            <p><a href="/" style="position:relative;left:-130px; bottom: 1010px;"><button type="button"
-                style="border-color:red;border-width: 3px;padding: 23px; 
+            <p><a href="#" style="position:relative;left:-130px; bottom: 1010px;"><button onclick="return false" type="button"
+                style="padding: 23px; 
                         background-color:transparent;border-radius: 50%; height: 20px;"></button></a></p>
             <!-- D PAD Button RIGHT/CLOSE -->
-            <p><a href="/" style="position:relative;left:-53px; bottom: 1080px;"><button type="button"
-                style="border-color:red;border-width: 3px;padding: 23px; 
+            <p><a href="#" style="position:relative;left:-53px; bottom: 1080px;"><button onclick="return false" type="button"
+                style="padding: 23px; 
                         background-color:transparent;border-radius: 50%; height: 20px;"></button></a></p>
 		</div>
-	</body>
+
+	<!--User Inputs-->>
+			<div style="text-align:center; position:relative; bottom: 800px; ">
+				<form>
+				
+					<input type="text" id="xval" name="xvalue" placeholder="Enter X Value" >
+					
+					<input type="text" id="yval" name="yvalue" placeholder="Enter Y Value">
+					
+					<input type="text" id="zval" name="zvalue" placeholder="Enter Z Value">
+				</form>
+			</div>
+		</body>
+	<script>
+		function runRobot() {
+			xdata = new FormData(document.getElementByName("xvalue").values[0])
+			ydata = new FormData(document.getElementByName("yvalue").values[0])
+			zdata = new FormData(document.getElementByName("zvalue").values[0])
+			let xhttp = new XMLHttpRequest();
+			xhttp.open('POST', 'http://127.0.0.1:5000/run');
+			xhttp.send();
+		}
+	</script>
 </html>
