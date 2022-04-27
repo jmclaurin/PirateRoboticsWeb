@@ -555,15 +555,58 @@ def move_right():
         success = True
         success &= basicMovement(base, -0.025, 0, 0, 0, 0, 0)
 
+def move_left():
+    # Import the utilities helper module
+    import argparse
+
+    
+    # Import the utilities helper module
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
+    import utilities
+
+    # Parse arguments
+    args = utilities.parseConnectionArguments()
+    
+    # Parse arguments
+    parser = argparse.ArgumentParser()
+    args = utilities.parseConnectionArguments(parser)
+
+    # Create connection to the device and get the router
+    with utilities.DeviceConnection.createTcpConnection(args) as router:
+
+        # Create required services
+        base = BaseClient(router)
+
+        # Example core
+
+        
+        #print("Returning Arm to Home")
+        # Utilize for home button.Home position method above.
+        success = True
+        success &= basicMovement(base, 0.025, 0, 0, 0, 0, 0)
+
+def stopMovement(base):
+
+    command = Base_pb2.TwistCommand()
+
+    command.reference_frame = Base_pb2.CARTESIAN_REFERENCE_FRAME_TOOL
+    command.duration = 0
+    time.sleep(.5)
+
+    print ("Stopping the robot...")
+    base.Stop()
+    time.sleep(1)
+
+ 
+
+    return True
+
 
 ##MainMethod
 
 def main():
-    print("Moving to Right")
-    basicOBJDetect()
-    #move_right()
+    stopMovement()
 
 
 if __name__ == "__main__":
     exit(main())
-

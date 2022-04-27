@@ -2,9 +2,14 @@
 #Robotic Arm 
 #===================================================
 
+from bdb import Breakpoint
+from click import command
+
+import keyboard
 
 from tracemalloc import stop
-import cv2 
+import cv2
+from numpy import outer 
 from realsense_camera import*
 
 from flask import Flask, request, render_template, Response, request, redirect, url_for
@@ -12,6 +17,7 @@ from flask import Flask, request, render_template, Response, request, redirect, 
 
 
 import json, pickle, csv
+
 
 #from core.company import Company
 # from capstone2020.core.employee import Employee
@@ -72,6 +78,9 @@ from matplotlib.pyplot import phase_spectrum
 import core.water_bottle_routine as wr
 import core.ObjDetectionTest1 as ot
 import core.PirateRobotics.api_python.examples.ObjDetectionTest1 as od 
+import core.PirateRobotics.api_python.examples.CyberpunkTest2 as cp
+import core.PirateRobotics.api_python.examples.ItemPickUp as itemPickUp
+import core.PirateRobotics.api_python.examples.ItemDropOff as itemDropOff
 
 #from core.water_bottle_routine import GripperCommandExample 
 # from core.grocery_store_Web import *
@@ -175,52 +184,29 @@ def calculate_provisioning():
     rp_metrics = (float("{:.2f}".format(rp_metrics[0])), float("{:.2f}".format(rp_metrics[1])))
     return success_response(rp_metrics)
 
-@app.route("/move_to_home", methods=['POST'])
-def move_to_home():
-    #Moving forward code
-    forward_message = "Moving Forward..."
-    print("Hello world")
-    #call main method from water_bottle_routine
-    #wr.main()
-    od.main()
-    
-   
-    return render_template('test.html', forward_message=forward_message);
-
-@app.route("/move_left", methods=['POST'])
-def move_left():
-    #Moving forward code
-    forward_message = "Moving Forward..."
-    print("Hello world")
-    #call main method from water_bottle_routine
-    #wr.main()
-    wr.main()
-   
-    return render_template('test.html', forward_message=forward_message);
-
-@app.route("/move_right", methods=['POST'])
-def move_right():
-    #Moving forward code
-    forward_message = "Moving Forward..."
-    print("Hello world")
-    #call main method from water_bottle_routine
-    #wr.main()
-    ot.main()
-   
-    return render_template('test.html', forward_message=forward_message);
-
 @app.route("/stop_move", methods=['POST'])
 def stop_move():
     #stop moving code
-    #subprocess.call("python manual.py")
+    forward_message = "You may not use the robot anymore ... Thank you :("
     ot.main()
    
     return render_template('test.html', forward_message=forward_message);
-#Move to home button 
 
-#ObjDetectionTest1.example_move_to_home_position(base)
+@app.route("/keyboard_actions", methods=['POST'])
+def keyboard_actions():
+    forward_message = "You may begin using the robot ... Have fun ;)"
+    cp.main()
+   
+    return render_template('test.html', forward_message=forward_message);
 
-cap = cv2.VideoCapture(1)
+@app.route("/object_input", methods=['POST'])
+def object_input():
+    forward_message = "You may enter an object for the robot to pick up."
+    itemPickUp.main()
+
+    return render_template('test.html', forward_message=forward_message);
+
+cap = cv2.VideoCapture(0)
 
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
 
@@ -376,7 +362,7 @@ while True:
         break 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
 
 @app.route('/')
 def index():
